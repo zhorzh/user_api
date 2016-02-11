@@ -1,6 +1,7 @@
 from core.config import SECRET_KEY
 from identity import identity
-from models import User
+from identity.models.user import User
+from identity.decorators.anonymous_token_required import anonymous_token_required
 from core.services import sqlite
 from flask import jsonify
 from flask import request
@@ -8,6 +9,7 @@ import jwt
 
 
 @identity.route('/user/register', methods=['PATCH'])
+@anonymous_token_required
 def user_register():
     header = request.headers.get('Authorization')
     token = header.split()[1]
@@ -29,7 +31,4 @@ def user_register():
 
     sqlite.session.commit()
 
-    token = jwt.encode({'user_id': user.id,
-                        'scope': 'authenticated'},
-                       SECRET_KEY)
-    return jsonify(token=token, user=user.serialize()), 200
+    return jsonify(user=user.serialize()), 200

@@ -1,15 +1,15 @@
-from core.config import SECRET_KEY
-from identity import identity
-from identity.models.user import User
-from identity.decorators.anonymous_token_required import anonymous_token_required
+import jwt
 from flask import jsonify
 from flask import request
-import jwt
+from core.config import SECRET_KEY
+from identity import identity
+from identity.decorators.authentication_token_required import authentication_token_required
+from identity.models.user import User
 
 
-@identity.route('/user/authenticate', methods=['POST'])
-@anonymous_token_required
-def user_authenticate():
+@identity.route('/user/unauthenticate', methods=['POST'])
+@authentication_token_required
+def user_unauthenticate():
     try:
         email = request.get_json()['data']['email']
     except KeyError:
@@ -25,6 +25,6 @@ def user_authenticate():
         return jsonify(error='404 Not Found: user not found'), 404
 
     token = jwt.encode({'user_id': user.id,
-                        'scope': 'authenticated'},
+                        'scope': 'anonymous'},
                        SECRET_KEY)
     return jsonify(token=token, user=user.serialize()), 200

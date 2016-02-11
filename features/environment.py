@@ -1,6 +1,6 @@
 import ipdb
 from core.services import sqlite
-from identity.models import User
+from identity.models.user import User
 
 
 def before_scenario(context, scenario):

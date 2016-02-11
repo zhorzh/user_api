@@ -16,4 +16,5 @@ class User(sqlite.Model):
 
     def serialize(self):
         return dict(id=self.id,
-                    email=self.email)
+                    email=self.email,
+                    password=self.password)

@@ -1,6 +1,6 @@
 from core.config import SECRET_KEY
 from identity import identity
-from models import User
+from identity.models.user import User
 from core.services import sqlite
 from flask import jsonify
 import jwt
