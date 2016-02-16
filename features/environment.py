@@ -1,15 +1,16 @@
 import ipdb
-from core.services import sqlite
+from core.services import postgres
 from identity.models.user import User
 
 
 def before_scenario(context, scenario):
-    sqlite.drop_all()
-    sqlite.create_all()
+    postgres.drop_all()
+    postgres.create_all()
 
 
 def after_scenario(context, scenario):
-    sqlite.drop_all()
+    postgres.drop_all()
+    postgres.create_all()
 
 
 def after_step(context, step):

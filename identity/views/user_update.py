@@ -1,7 +1,7 @@
 from identity import identity
 from identity.models.user import User
 from identity.decorators.authentication_token_required import authentication_token_required
-from core.services import sqlite
+from core.services import postgres
 from flask import jsonify
 from flask import request
 
@@ -24,5 +24,5 @@ def user_update(user_id):
     except KeyError:
         pass
 
-    sqlite.session.commit()
+    postgres.session.commit()
     return jsonify(user=user.serialize()), 200

@@ -14,6 +14,7 @@ parse-type==0.3.4
 path.py==8.1.2
 pexpect==4.0.1
 pickleshare==0.6
+psycopg2==2.6.1
 ptyprocess==0.5.1
 pycrypto==2.6.1
 PyJWT==1.4.0

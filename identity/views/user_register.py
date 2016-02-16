@@ -2,7 +2,7 @@ from core.config import SECRET_KEY
 from identity import identity
 from identity.models.user import User
 from identity.decorators.anonymous_token_required import anonymous_token_required
-from core.services import sqlite
+from core.services import postgres
 from flask import jsonify
 from flask import request
 import jwt
@@ -29,6 +29,6 @@ def user_register():
     except KeyError:
         return jsonify(error='422 Unprocessable Entity: no password'), 422
 
-    sqlite.session.commit()
+    postgres.session.commit()
 
     return jsonify(user=user.serialize()), 200

@@ -1,3 +1,3 @@
-SQLALCHEMY_DATABASE_URI = 'sqlite:///sqlite.db'
+SQLALCHEMY_DATABASE_URI = 'postgres://api:123@localhost/api_database'
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 SECRET_KEY = '123'
